@@ -1,0 +1,20 @@
+$(document).ready(function() {
+    $('#predictionForm').submit(async function(e) {
+        e.preventDefault();
+
+        const temperature = parseFloat($('#temperature').val());
+        const humidity = parseFloat($('#humidity').val());
+        const rainfall = parseFloat($('#rainfall').val());
+
+        // Send data to server for prediction
+        const prediction = await predictFlood(temperature, humidity, rainfall);
+
+        $('#predictionResult').html(`<p>Predicted Flood Risk: ${prediction}</p>`);
+    });
+});
+
+async function predictFlood(temperature, humidity, rainfall) {
+    // You would make an API call to your ML model deployed on the server here
+    // For demonstration, I'm just returning a random value
+    return Math.random() < 0.5 ? 'Low' : 'High';
+}
